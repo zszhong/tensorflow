@@ -42,10 +42,10 @@ toolchain {
   target_system_name: "local"
   toolchain_identifier: "local_linux"
 
-  tool_path { name: "ar" path: "/usr/bin/ar" }
-  tool_path { name: "compat-ld" path: "/usr/bin/ld" }
-  tool_path { name: "cpp" path: "/usr/bin/cpp" }
-  tool_path { name: "dwp" path: "/usr/bin/dwp" }
+  tool_path { name: "ar" path: "/home/nlpr1/gcc-4.8.4/rtf/bin/ar" }
+  tool_path { name: "compat-ld" path: "/home/nlpr1/gcc-4.8.4/rtf/bin/ld" }
+  tool_path { name: "cpp" path: "/home/nlpr1/gcc-4.8.4/rtf/bin/cpp" }
+  tool_path { name: "dwp" path: "/home/nlpr1/gcc-4.8.4/rtf/bin/dwp" }
   # As part of the TensorFlow release, we place some cuda-related compilation
   # files in @local_config_cuda//crosstool/clang/bin, and this relative
   # path, combined with the rest of our Bazel configuration causes our
@@ -54,28 +54,33 @@ toolchain {
   # Use "-std=c++11" for nvcc. For consistency, force both the host compiler
   # and the device compiler to use "-std=c++11".
   cxx_flag: "-std=c++11"
-  linker_flag: "-lstdc++"
-  linker_flag: "-B/usr/bin/"
+  linker_flag: "-lstdc++"  
+linker_flag: "-B/home/nlpr1/gcc-4.8.4/rtf/bin/"
+linker_flag: "-Wl,-R/home/nlpr1/gcc-4.8.4/rtf/lib64"
+cxx_builtin_include_directory: "/home/nlpr1/gcc-4.8.4/rtf/lib/gcc/x86_64-unknown-linux-gnu/4.8.4/include/"
+cxx_builtin_include_directory: "/home/nlpr1/gcc-4.8.4/rtf/lib/gcc/x86_64-unknown-linux-gnu/4.8.4/include-fixed"
+cxx_builtin_include_directory: "/home/nlpr1/gcc-4.8.4/rtf/include/c++/4.8.4/"
 
   # TODO(bazel-team): In theory, the path here ought to exactly match the path
   # used by gcc. That works because bazel currently doesn't track files at
   # absolute locations and has no remote execution, yet. However, this will need
   # to be fixed, maybe with auto-detection?
-  cxx_builtin_include_directory: "/usr/lib/gcc/"
-  cxx_builtin_include_directory: "/usr/local/include"
+  cxx_builtin_include_directory: "/home/nlpr1/gcc-4.8.4/rtf/lib/gcc/"  
+  cxx_builtin_include_directory: "/home/nlpr1/gcc-4.8.4/rtf/include"
   cxx_builtin_include_directory: "/usr/include"
-  tool_path { name: "gcov" path: "/usr/bin/gcov" }
+  cxx_builtin_include_directory: "/usr/local/cuda-6.5/include"
+  tool_path { name: "gcov" path: "/home/nlpr1/gcc-4.8.4/rtf/bin/gcov" }
 
   # C(++) compiles invoke the compiler (as that is the one knowing where
   # to find libraries), but we provide LD so other rules can invoke the linker.
-  tool_path { name: "ld" path: "/usr/bin/ld" }
+  tool_path { name: "ld" path: "/home/nlpr1/gcc-4.8.4/rtf/bin/ld" }
 
-  tool_path { name: "nm" path: "/usr/bin/nm" }
-  tool_path { name: "objcopy" path: "/usr/bin/objcopy" }
+  tool_path { name: "nm" path: "/home/nlpr1/gcc-4.8.4/rtf/bin/nm" }
+  tool_path { name: "objcopy" path: "/home/nlpr1/gcc-4.8.4/rtf/bin/objcopy" }
   objcopy_embed_flag: "-I"
   objcopy_embed_flag: "binary"
-  tool_path { name: "objdump" path: "/usr/bin/objdump" }
-  tool_path { name: "strip" path: "/usr/bin/strip" }
+  tool_path { name: "objdump" path: "/home/nlpr1/gcc-4.8.4/rtf/bin/objdump" }
+  tool_path { name: "strip" path: "/home/nlpr1/gcc-4.8.4/rtf/bin/strip" }
 
   # Anticipated future default.
   unfiltered_cxx_flag: "-no-canonical-prefixes"
@@ -100,7 +105,7 @@ toolchain {
 
   # Enable coloring even if there's no attached terminal. Bazel removes the
   # escape sequences if --nocolor is specified. This isn't supported by gcc
-  # on Ubuntu 14.04.
+  # on nlpr1 14.04.
   # compiler_flag: "-fcolor-diagnostics"
 
   # All warnings are enabled. Maybe enable -Werror as well?

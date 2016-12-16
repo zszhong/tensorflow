@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/home/nlpr1/gcc-4.8.4/rtf/bin/python
 # Copyright 2015 The TensorFlow Authors. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
